@@ -11,6 +11,7 @@ public class StopWatch implements ActionListener {
 
 	JLabel label;
 	long start;
+	JButton startB;
 	
 	StopWatch(){
 	
@@ -19,14 +20,14 @@ public class StopWatch implements ActionListener {
 		frame.setSize(230,90);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton startB = new JButton("Start");
-		JButton stopB = new JButton("Stop");
+		startB = new JButton("Start");
+		//JButton stopB = new JButton("Stop");
 		
 		startB.addActionListener(this);
-		stopB.addActionListener(this);
+		//stopB.addActionListener(this);
 		
 		frame.add(startB);
-		frame.add(stopB);
+	//	frame.add(stopB);
 		
 		label = new JLabel("Press start to begin timer.");
 		
@@ -37,12 +38,14 @@ public class StopWatch implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Calendar cal = Calendar.getInstance();
-		if(e.getActionCommand().equals("Start")){
+		if(!label.getText().contains("Running")){
 			start = cal.getTimeInMillis();
 			label.setText("Stop watch is Running...");
+			startB.setText("Stop");
 		}
 		else {
 			label.setText("Elapsed time is... " +(double) (cal.getTimeInMillis()-start)/1000);
+			startB.setText("Start");
 		}
 		
 	}
